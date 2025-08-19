@@ -1,13 +1,18 @@
 package tests;
 
 import java.time.Duration;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import pageobjects.CheckoutPage;
 import pageobjects.HomePage;
@@ -51,63 +56,78 @@ public class TestPOM {
         search = new SearchPage(driver);
         product = new ProductPage(driver);
         checkout = new CheckoutPage(driver);
+
+        // Ensure we are inside the store before any tests
+        System.out.println("[STEP] Enter Store (Setup): START");
+        home.enterStore();
+        Assert.assertTrue(home.isHomePageLoaded(), "Home page did not load after entering the store (setup)");
+        System.out.println("[STEP] Enter Store (Setup): END");
     }
 
-    @Test(dataProvider = "loginData", dataProviderClass = TestDataProvider.class)
+    @Test(priority = 1, dataProvider = "loginData", dataProviderClass = TestDataProvider.class)
     public void testLogin(String user, String pass) {
         this.username = user;
         this.password = pass;
-
-        home.enterStore();
-        logger.info("Entered the store");
-
+        System.out.println("[STEP] Sign In: START");
         login.login(user, pass);
         Assert.assertTrue(login.isLoggedIn(), "Login failed: Sign Out not visible");
         logger.info("Login successful");
+        System.out.println("[STEP] Sign In: END");
     }
 
-    @Test(dependsOnMethods = "testLogin")
+    @Test(priority = 2, dependsOnMethods = "testLogin")
     public void testSearchProduct() {
-        search.searchProduct(ConfigReader.get("searchTerm"));
+        System.out.println("[STEP] Search: START");
+        search.searchProduct(ConfigReader.getSanitized("searchTerm"));
         search.openFirstSearchResultProduct();
-        logger.info("Searched and opened product: " + ConfigReader.get("searchTerm"));
+        logger.info("Searched and opened product: " + ConfigReader.getSanitized("searchTerm"));
+        Assert.assertTrue(search.isProductPageOpened(), "Product page did not open after clicking first result");
+        System.out.println("[STEP] Search: END");
     }
 
-    @Test(dependsOnMethods = "testSearchProduct")
+    @Test(priority = 3, dependsOnMethods = "testSearchProduct")
     public void testAddToCart() {
+        System.out.println("[STEP] Add To Cart: START");
         product.addToCart();
         logger.info("Product added to cart");
+        System.out.println("[STEP] Add To Cart: END");
     }
 
-    @Test(dependsOnMethods = "testAddToCart")
+    @Test(priority = 4, dependsOnMethods = "testAddToCart")
     public void testCheckout() {
+        System.out.println("[STEP] Checkout: START");
         product.checkout();
         logger.info("Navigated to checkout");
-
         Assert.assertTrue(checkout.isPaymentDetailsVisible(), "Payment details not visible");
         checkout.clickContinueOnBilling();
         logger.info("Billing continued");
+        System.out.println("[STEP] Checkout: END");
     }
 
-    @Test(dependsOnMethods = "testCheckout")
+    @Test(priority = 5, dependsOnMethods = "testCheckout")
     public void testConfirmOrder() {
+        System.out.println("[STEP] Confirm Order: START");
         checkout.confirmOrder();
-        logger.info("Order confirmed");
-
         Assert.assertTrue(checkout.isThankYouMessageDisplayed(), "Thank You message not displayed");
-        logger.info("Order complete");
+        System.out.println("[STEP] Confirm Order: END");
     }
 
-    @Test(dependsOnMethods = "testConfirmOrder")
+    @Test(priority = 6, dependsOnMethods = "testConfirmOrder")
     public void testReturnToMainMenu() {
+        System.out.println("[STEP] Return To Main Menu: START");
         checkout.returnToMainMenu();
         logger.info("Returned to main menu");
+        Assert.assertTrue(home.isHomePageLoaded(), "Home page not visible after returning to main menu");
+        System.out.println("[STEP] Return To Main Menu: END");
     }
 
-    @Test(dependsOnMethods = "testReturnToMainMenu")
+    @Test(priority = 7, dependsOnMethods = "testReturnToMainMenu")
     public void testSignOut() {
+        System.out.println("[STEP] Sign Out: START");
         login.signOut();
         logger.info("Signed out successfully");
+        Assert.assertTrue(home.isHomePageLoaded(), "Sign In link not visible after sign out");
+        System.out.println("[STEP] Sign Out: END");
     }
 
     @AfterClass

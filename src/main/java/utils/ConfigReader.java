@@ -20,5 +20,16 @@ public class ConfigReader {
     public static String get(String key) {
         return properties.getProperty(key);
     }
+
+    public static String getSanitized(String key) {
+        String value = get(key);
+        if (value == null) return null;
+        String trimmed = value.trim();
+        if ((trimmed.startsWith("\"") && trimmed.endsWith("\"")) ||
+            (trimmed.startsWith("'") && trimmed.endsWith("'"))) {
+            return trimmed.substring(1, trimmed.length() - 1);
+        }
+        return trimmed;
+    }
 }
 

@@ -16,6 +16,12 @@ public class HomePage {
 	
 	@FindBy(linkText="Enter the Store")
 	private WebElement enterStoreLink;
+
+	@FindBy(partialLinkText="Sign In")
+	private WebElement signInLink;
+
+	@FindBy(css = "a[href*='viewCart']")
+	private WebElement cartLink;
 	
 	public HomePage(WebDriver driver) {
 		this.driver=driver;
@@ -33,6 +39,25 @@ public class HomePage {
 	        JavascriptExecutor js = (JavascriptExecutor) driver;
 	        js.executeScript("arguments[0].click();", enterLink);
 	    }
+	}
+
+	public boolean isHomePageLoaded() {
+		try {
+			return signInLink.isDisplayed();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public void goToCart() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		try {
+			WebElement cart = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href*='viewCart']")));
+			cart.click();
+		} catch (Exception e) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", cartLink);
+		}
 	}
 
 }
