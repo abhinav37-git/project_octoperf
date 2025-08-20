@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="7" passed="5" failed="1" skipped="1">
+<testng-results ignored="0" total="14" passed="10" failed="2" skipped="2">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-08-20T07:42:40 IST" name="Default suite" finished-at="2025-08-20T07:43:21 IST" duration-ms="41270">
+  <suite started-at="2025-08-20T08:00:38 IST" name="ParallelCrossBrowserSuite" finished-at="2025-08-20T08:01:28 IST" duration-ms="49391">
     <groups>
     </groups>
-    <test started-at="2025-08-20T07:42:40 IST" name="Default test" finished-at="2025-08-20T07:43:21 IST" duration-ms="41270">
+    <test started-at="2025-08-20T08:00:38 IST" name="EdgeTest" finished-at="2025-08-20T08:01:26 IST" duration-ms="47405">
       <class name="tests.TestPOM">
-        <test-method is-config="true" signature="setup(java.lang.String)[pri:0, instance:tests.TestPOM@60957c0f]" started-at="2025-08-20T07:42:40 IST" name="setup" finished-at="2025-08-20T07:42:48 IST" duration-ms="8132" status="PASS">
+        <test-method is-config="true" signature="setup(java.lang.String)[pri:0, instance:tests.TestPOM@dfddc9a]" started-at="2025-08-20T08:00:38 IST" name="setup" finished-at="2025-08-20T08:00:50 IST" duration-ms="11650" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[chrome]]>
+                <![CDATA[edge]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="testLogin(java.lang.String,java.lang.String)[pri:1, instance:tests.TestPOM@60957c0f]" started-at="2025-08-20T07:42:50 IST" name="testLogin" data-provider="loginData" finished-at="2025-08-20T07:43:03 IST" duration-ms="13168" status="PASS">
+        <test-method signature="testLogin(java.lang.String,java.lang.String)[pri:1, instance:tests.TestPOM@dfddc9a]" started-at="2025-08-20T08:00:53 IST" name="testLogin" data-provider="loginData" finished-at="2025-08-20T08:01:07 IST" duration-ms="14652" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -34,23 +34,23 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLogin -->
-        <test-method signature="testSearchProduct()[pri:2, instance:tests.TestPOM@60957c0f]" started-at="2025-08-20T07:43:03 IST" name="testSearchProduct" finished-at="2025-08-20T07:43:06 IST" depends-on-methods="tests.TestPOM.testLogin" duration-ms="3036" status="PASS">
+        <test-method signature="testSearchProduct()[pri:2, instance:tests.TestPOM@dfddc9a]" started-at="2025-08-20T08:01:07 IST" name="testSearchProduct" finished-at="2025-08-20T08:01:09 IST" depends-on-methods="tests.TestPOM.testLogin" duration-ms="1961" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testSearchProduct -->
-        <test-method signature="testAddToCart()[pri:3, instance:tests.TestPOM@60957c0f]" started-at="2025-08-20T07:43:06 IST" name="testAddToCart" finished-at="2025-08-20T07:43:07 IST" depends-on-methods="tests.TestPOM.testSearchProduct" duration-ms="930" status="PASS">
+        <test-method signature="testAddToCart()[pri:3, instance:tests.TestPOM@dfddc9a]" started-at="2025-08-20T08:01:09 IST" name="testAddToCart" finished-at="2025-08-20T08:01:11 IST" depends-on-methods="tests.TestPOM.testSearchProduct" duration-ms="1217" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testAddToCart -->
-        <test-method signature="testCheckout()[pri:4, instance:tests.TestPOM@60957c0f]" started-at="2025-08-20T07:43:07 IST" name="testCheckout" finished-at="2025-08-20T07:43:08 IST" depends-on-methods="tests.TestPOM.testAddToCart" duration-ms="1315" status="PASS">
+        <test-method signature="testCheckout()[pri:4, instance:tests.TestPOM@dfddc9a]" started-at="2025-08-20T08:01:11 IST" name="testCheckout" finished-at="2025-08-20T08:01:12 IST" depends-on-methods="tests.TestPOM.testAddToCart" duration-ms="1653" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCheckout -->
-        <test-method signature="testConfirmOrder()[pri:5, instance:tests.TestPOM@60957c0f]" started-at="2025-08-20T07:43:08 IST" name="testConfirmOrder" finished-at="2025-08-20T07:43:09 IST" depends-on-methods="tests.TestPOM.testCheckout" duration-ms="726" status="PASS">
+        <test-method signature="testConfirmOrder()[pri:5, instance:tests.TestPOM@dfddc9a]" started-at="2025-08-20T08:01:12 IST" name="testConfirmOrder" finished-at="2025-08-20T08:01:13 IST" depends-on-methods="tests.TestPOM.testCheckout" duration-ms="1237" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testConfirmOrder -->
-        <test-method signature="testReturnToMainMenu()[pri:6, instance:tests.TestPOM@60957c0f]" started-at="2025-08-20T07:43:09 IST" name="testReturnToMainMenu" finished-at="2025-08-20T07:43:20 IST" depends-on-methods="tests.TestPOM.testConfirmOrder" duration-ms="10659" status="FAIL">
+        <test-method signature="testReturnToMainMenu()[pri:6, instance:tests.TestPOM@dfddc9a]" started-at="2025-08-20T08:01:13 IST" name="testReturnToMainMenu" finished-at="2025-08-20T08:01:24 IST" depends-on-methods="tests.TestPOM.testConfirmOrder" duration-ms="10741" status="FAIL">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[Home page not visible after returning to main menu expected [true] but found [false]]]>
@@ -75,33 +75,27 @@ at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 at org.testng.TestRunner.privateRun(TestRunner.java:741)
 at org.testng.TestRunner.run(TestRunner.java:616)
 at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
-at org.testng.SuiteRunner.run(SuiteRunner.java:312)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
-at org.testng.TestNG.runSuites(TestNG.java:1112)
-at org.testng.TestNG.run(TestNG.java:1079)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+at java.base/java.lang.Thread.run(Thread.java:1583)
 ]]>
             </full-stacktrace>
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testReturnToMainMenu -->
-        <test-method signature="testSignOut()[pri:7, instance:tests.TestPOM@60957c0f]" started-at="2025-08-20T07:43:20 IST" name="testSignOut" finished-at="2025-08-20T07:43:20 IST" depends-on-methods="tests.TestPOM.testReturnToMainMenu" duration-ms="0" status="SKIP">
+        <test-method signature="testSignOut()[pri:7, instance:tests.TestPOM@dfddc9a]" started-at="2025-08-20T08:01:24 IST" name="testSignOut" finished-at="2025-08-20T08:01:24 IST" depends-on-methods="tests.TestPOM.testReturnToMainMenu" duration-ms="0" status="SKIP">
           <exception class="java.lang.Throwable">
             <message>
-              <![CDATA[Method tests.TestPOM.testSignOut() on instance tests.TestPOM@60957c0f depends on not successfully finished methods 
-[tests.TestPOM.testReturnToMainMenu() on instance tests.TestPOM@60957c0f]]]>
+              <![CDATA[Method tests.TestPOM.testSignOut() on instance tests.TestPOM@dfddc9a depends on not successfully finished methods 
+[tests.TestPOM.testReturnToMainMenu() on instance tests.TestPOM@dfddc9a]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.Throwable: Method tests.TestPOM.testSignOut() on instance tests.TestPOM@60957c0f depends on not successfully finished methods 
-[tests.TestPOM.testReturnToMainMenu() on instance tests.TestPOM@60957c0f]
+              <![CDATA[java.lang.Throwable: Method tests.TestPOM.testSignOut() on instance tests.TestPOM@dfddc9a depends on not successfully finished methods 
+[tests.TestPOM.testReturnToMainMenu() on instance tests.TestPOM@dfddc9a]
 at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
 at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
 at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
@@ -109,29 +103,139 @@ at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 at org.testng.TestRunner.privateRun(TestRunner.java:741)
 at org.testng.TestRunner.run(TestRunner.java:616)
 at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
-at org.testng.SuiteRunner.run(SuiteRunner.java:312)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
-at org.testng.TestNG.runSuites(TestNG.java:1112)
-at org.testng.TestNG.run(TestNG.java:1079)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+at java.base/java.lang.Thread.run(Thread.java:1583)
 ]]>
             </full-stacktrace>
           </exception> <!-- java.lang.Throwable -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testSignOut -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.TestPOM@60957c0f]" started-at="2025-08-20T07:43:20 IST" name="tearDown" finished-at="2025-08-20T07:43:21 IST" duration-ms="1542" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.TestPOM@dfddc9a]" started-at="2025-08-20T08:01:24 IST" name="tearDown" finished-at="2025-08-20T08:01:26 IST" duration-ms="1489" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- tests.TestPOM -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- EdgeTest -->
+    <test started-at="2025-08-20T08:00:38 IST" name="ChromeTest" finished-at="2025-08-20T08:01:28 IST" duration-ms="49391">
+      <class name="tests.TestPOM">
+        <test-method is-config="true" signature="setup(java.lang.String)[pri:0, instance:tests.TestPOM@1dd6d4b7]" started-at="2025-08-20T08:00:38 IST" name="setup" finished-at="2025-08-20T08:00:51 IST" duration-ms="12335" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testLogin(java.lang.String,java.lang.String)[pri:1, instance:tests.TestPOM@1dd6d4b7]" started-at="2025-08-20T08:00:53 IST" name="testLogin" data-provider="loginData" finished-at="2025-08-20T08:01:08 IST" duration-ms="15831" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[abhinav]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abhinav]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLogin -->
+        <test-method signature="testSearchProduct()[pri:2, instance:tests.TestPOM@1dd6d4b7]" started-at="2025-08-20T08:01:08 IST" name="testSearchProduct" finished-at="2025-08-20T08:01:12 IST" depends-on-methods="tests.TestPOM.testLogin" duration-ms="3051" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSearchProduct -->
+        <test-method signature="testAddToCart()[pri:3, instance:tests.TestPOM@1dd6d4b7]" started-at="2025-08-20T08:01:12 IST" name="testAddToCart" finished-at="2025-08-20T08:01:12 IST" depends-on-methods="tests.TestPOM.testSearchProduct" duration-ms="531" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAddToCart -->
+        <test-method signature="testCheckout()[pri:4, instance:tests.TestPOM@1dd6d4b7]" started-at="2025-08-20T08:01:12 IST" name="testCheckout" finished-at="2025-08-20T08:01:14 IST" depends-on-methods="tests.TestPOM.testAddToCart" duration-ms="2324" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCheckout -->
+        <test-method signature="testConfirmOrder()[pri:5, instance:tests.TestPOM@1dd6d4b7]" started-at="2025-08-20T08:01:14 IST" name="testConfirmOrder" finished-at="2025-08-20T08:01:15 IST" depends-on-methods="tests.TestPOM.testCheckout" duration-ms="1032" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testConfirmOrder -->
+        <test-method signature="testReturnToMainMenu()[pri:6, instance:tests.TestPOM@1dd6d4b7]" started-at="2025-08-20T08:01:15 IST" name="testReturnToMainMenu" finished-at="2025-08-20T08:01:26 IST" depends-on-methods="tests.TestPOM.testConfirmOrder" duration-ms="10323" status="FAIL">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Home page not visible after returning to main menu expected [true] but found [false]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Home page not visible after returning to main menu expected [true] but found [false]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1590)
+at org.testng.Assert.assertTrue(Assert.java:57)
+at tests.TestPOM.testReturnToMainMenu(TestPOM.java:120)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+at java.base/java.lang.Thread.run(Thread.java:1583)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testReturnToMainMenu -->
+        <test-method signature="testSignOut()[pri:7, instance:tests.TestPOM@1dd6d4b7]" started-at="2025-08-20T08:01:26 IST" name="testSignOut" finished-at="2025-08-20T08:01:26 IST" depends-on-methods="tests.TestPOM.testReturnToMainMenu" duration-ms="0" status="SKIP">
+          <exception class="java.lang.Throwable">
+            <message>
+              <![CDATA[Method tests.TestPOM.testSignOut() on instance tests.TestPOM@1dd6d4b7 depends on not successfully finished methods 
+[tests.TestPOM.testReturnToMainMenu() on instance tests.TestPOM@1dd6d4b7]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.Throwable: Method tests.TestPOM.testSignOut() on instance tests.TestPOM@1dd6d4b7 depends on not successfully finished methods 
+[tests.TestPOM.testReturnToMainMenu() on instance tests.TestPOM@1dd6d4b7]
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+at java.base/java.lang.Thread.run(Thread.java:1583)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.Throwable -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSignOut -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.TestPOM@1dd6d4b7]" started-at="2025-08-20T08:01:26 IST" name="tearDown" finished-at="2025-08-20T08:01:28 IST" duration-ms="1827" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.TestPOM -->
+    </test> <!-- ChromeTest -->
+  </suite> <!-- ParallelCrossBrowserSuite -->
 </testng-results>

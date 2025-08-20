@@ -124,8 +124,8 @@ public class TestPOM {
     @Test(priority = 7, dependsOnMethods = "testReturnToMainMenu")
     public void testSignOut() {
         System.out.println("[STEP] Sign Out: START");
-        login.signOut();
-        logger.info("Signed out successfully");
+        checkout.signOut();
+        System.out.println("Signed out successfully");
         Assert.assertTrue(home.isHomePageLoaded(), "Sign In link not visible after sign out");
         System.out.println("[STEP] Sign Out: END");
     }

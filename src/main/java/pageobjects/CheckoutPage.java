@@ -135,6 +135,30 @@ public class CheckoutPage {
 	    throw new RuntimeException("Failed to click Return to Main Menu after retries.");
 	}
 
+	public void signOut() {
+	    By signOutLinkBy = By.partialLinkText("Sign Out");
+	    int attempts = 0;
+	    while (attempts < 2) {
+	        try {
+	            WebElement signOutLink = driver.findElement(signOutLinkBy);
+	            signOutLink.click();
+	            System.out.println("User signed out successfully");
+	            break;  // exit loop if successful
+	        } catch (StaleElementReferenceException e) {
+	            attempts++;
+	            System.out.println("StaleElementReferenceException caught. Retrying... Attempt " + attempts);
+	            if (attempts == 2) {
+	                System.out.println("Failed to sign out due to stale element.");
+	                throw e;
+	            }
+	        } catch (Exception e) {
+	            System.out.println("Failed to sign out: " + e.getMessage());
+	            throw e;
+	        }
+	    }
+	}
+
+
 
 
 }
