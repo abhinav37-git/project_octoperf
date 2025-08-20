@@ -8,7 +8,7 @@ public class TestDataProvider {
 
     @DataProvider(name = "loginData")
     public static Object[][] loginDataProvider() throws Exception {
-        String excelPath = "src/test/resources/testdata.xlsx";
+        String excelPath = "C:\\Users\\abhinav.dwivedi\\Downloads\\testdataprovider.xlsx";
         return ExcelDataTest.getTestData(excelPath, "Sheet1");
     }
 }

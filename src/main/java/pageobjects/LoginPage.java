@@ -86,10 +86,18 @@ public class LoginPage {
 	}
 	
 	public void signOut() {
-		logger.info("User is signing out" );
-		
-		signOutLink.click();
-		
-		logger.info("signed out");
+	    logger.info("User is signing out");
+
+	    By signOutLinkBy = By.partialLinkText("Sign Out");
+
+	    try {
+	        WebElement signOutLink = wait.until(ExpectedConditions.elementToBeClickable(signOutLinkBy));
+	        signOutLink.click();
+	        logger.info("Signed out successfully");
+	    } catch (Exception e) {
+	        logger.error("Failed to sign out", e);
+	        throw e;
+	    }
 	}
+
 }

@@ -4,105 +4,114 @@ import java.time.Duration;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.*;
+
+import static org.testng.Assert.*;
 
 public class SearchPage {
     private static final Logger logger = LogManager.getLogger(SearchPage.class);
     WebDriver driver;
     WebDriverWait wait;
 
-    @FindBy(xpath = "//input[@name='keyword']")
-    WebElement searchInput;
-
-    @FindBy(xpath = "//input[@name='searchProducts']")
-    WebElement searchBtn;
-
-    // Keep no hard-coded product id; we'll resolve dynamically in code
-
-    @FindBy(css = "#Catalog h2")
-    private WebElement productHeader;
-
-    @FindBy(css = "a[href*='Catalog.action']")
-    private WebElement catalogHomeLink;
-
     public SearchPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    public void searchProduct(String searchkey) {
+    public void searchProduct(String searchTerm) {
+        logger.info("Searching for: {}", searchTerm);
+
         try {
-            wait.until(ExpectedConditions.visibilityOf(searchInput));
+            WebElement searchInput = wait.until(ExpectedConditions.elementToBeClickable(By.name("keyword")));
+            assertNotNull(searchInput, "Search input not found");
+            searchInput.clear();
+
+            // Use JavascriptExecutor to set the input value
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].value = arguments[1];", searchInput, searchTerm);
+            // Trigger input event to notify any JS listeners
+            js.executeScript("arguments[0].dispatchEvent(new Event('input'));", searchInput);
+
+            logger.info("Entered search term into input using JavaScript");
+
+            WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.name("searchProducts")));
+            assertNotNull(searchButton, "Search button not found");
+
+            // Use JavaScript to click the button instead of WebElement.click()
+            js.executeScript("arguments[0].click();", searchButton);
+            logger.info("Clicked search button using JavaScript");
+
+            // Wait for results to appear
+            WebElement catalog = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Catalog")));
+            assertTrue(catalog.isDisplayed(), "Catalog not visible after search");
+            logger.info("Catalog is visible — search successful");
+
+        } catch (StaleElementReferenceException e) {
+            logger.error("StaleElementReferenceException during searchProduct", e);
+            throw new RuntimeException("Element became stale during search", e);
         } catch (TimeoutException e) {
-            try {
-                catalogHomeLink.click();
-                wait.until(ExpectedConditions.visibilityOf(searchInput));
-            } catch (Exception ignored) {
-                // fall through, will throw below if still not visible
-            }
+            logger.error("Timeout waiting for search input/results", e);
+            throw new RuntimeException("Search input or results not visible", e);
+        } catch (Exception e) {
+            logger.error("Unexpected error during search", e);
+            throw e;
         }
-        searchInput.clear();
-        logger.info("Searching for item: " + searchkey);
-        searchInput.sendKeys(searchkey);
-
-        wait.until(ExpectedConditions.elementToBeClickable(searchBtn));
-        searchBtn.click();
-
-        logger.debug("Search submitted");
     }
+
 
     public void openFirstSearchResultProduct() {
-        logger.info("Waiting for and opening first product from search results");
+        logger.info("Opening first product from search results");
 
-        // Ensure results loaded
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Catalog")));
-        } catch (TimeoutException e) {
-            throw new TimeoutException("Search results container not visible");
-        }
+        By catalogLocator = By.id("Catalog");
+        By productLinkLocator = By.cssSelector("a[href*='viewProduct'], a[href*='productId=']");
 
-        By[] candidateLocators = new By[] {
-                By.cssSelector("#Catalog a[href*='viewProduct']"),
-                By.cssSelector("#Catalog a[href*='productId=']"),
-                By.xpath("//div[@id='Catalog']//a[contains(@href,'viewProduct')][1]"),
-                By.xpath("//div[@id='Catalog']//a[contains(@href,'productId=')][1]")
-        };
+        int attempts = 0;
+        final int maxAttempts = 3;
 
-        WebElement linkToClick = null;
-        for (By locator : candidateLocators) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        while (attempts < maxAttempts) {
             try {
-                linkToClick = wait.until(ExpectedConditions.elementToBeClickable(locator));
-                if (linkToClick != null) break;
-            } catch (Exception ignored) {
-                // try next locator
+                // Wait for catalog to be visible
+                WebElement catalog = wait.until(ExpectedConditions.visibilityOfElementLocated(catalogLocator));
+                // Find all product links inside catalog fresh
+                java.util.List<WebElement> productLinks = catalog.findElements(productLinkLocator);
+
+                if (productLinks.isEmpty()) {
+                    throw new NoSuchElementException("No product links found inside catalog");
+                }
+
+                WebElement firstProductLink = productLinks.get(0);
+
+                // Scroll element into view
+                js.executeScript("arguments[0].scrollIntoView(true);", firstProductLink);
+
+                // Click the first product link using JavaScript
+                js.executeScript("arguments[0].click();", firstProductLink);
+
+                logger.info("Clicked first product link successfully (using JavaScript)");
+                return; // exit method on success
+
+            } catch (StaleElementReferenceException | NoSuchElementException e) {
+                attempts++;
+                logger.warn("Stale element or no product found, retrying attempt " + attempts);
+                try {
+                    Thread.sleep(500); // small wait before retrying
+                } catch (InterruptedException ignored) {}
             }
         }
 
-        if (linkToClick == null) {
-            throw new TimeoutException("No product link found in search results");
-        }
-
-        try {
-            linkToClick.click();
-        } catch (Exception e) {
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0].click();", linkToClick);
-        }
+        throw new TimeoutException("Failed to click the first product link after " + maxAttempts + " attempts");
     }
+
 
     public boolean isProductPageOpened() {
         try {
-            return wait.until(ExpectedConditions.visibilityOf(productHeader)).isDisplayed();
+            WebElement productHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#Catalog h2")));
+            return productHeader.isDisplayed();
         } catch (TimeoutException e) {
+            logger.warn("Product page not opened in expected time");
             return false;
         }
     }
